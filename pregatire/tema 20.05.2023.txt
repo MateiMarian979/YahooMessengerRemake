@@ -1,0 +1,117 @@
+1.Folosind un for , sa se afiseze numerele pare de la 0 pana la n(citit de la tastatura).
+ex: n = 7
+se afiseaza:0 2 4 6
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+2.Sa se citeasca un vector V[] de la tastatura cu n(citit de la tastatura) elemente . 
+Sa se faca suma elementelor din vector care sunt mai mari decat 10 SI divizibile cu 5 . 
+ex:
+n=5
+v={17,20,31,15,5}
+se afiseaza: 35 ( care e 20 + 15 )
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+3.Sa se citeasca un vector V[] de la tastatura cu n(citit de la tastatura) elemente . 
+Sa se faca produsul elementelor din vector care sunt mai mici decat 10 SAU divizibile cu 5 .
+ex:
+n=5
+v={2,20,31,46,5}
+se afiseaza: 200 ( care e 2 * 20 * 5)           explicatie:  (2 < 10 ; 20 = divizibil cu 5 ; 5 = si mai mic decat 10 si divizibil cu 5 )
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+4*.Sa se citeasca o matrice patratica m[][] de la tastatura cu n linii si n coloane . 
+Sa se afiseze elementele din matrice care sunt pare . 
+ex:
+n = 3
+matrice:
+1 2 3
+4 5 6
+7 8 9
+se afiseaza : 2 4 6 8 .
+hint( parcurgem elementele din matrice [ca la citire] si verificam proprietatea de paritate si le afisam ) 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+- MAI JOS IN DOCUMENT SUNT EXEMPLE DE CITIRI SI AFISARI DE VECTORI / MATRICI SI DUPA SUNT HINTURI PENTRU REZOLVAREA PROB 2 SI 4 - 
+-De invatat citirea si afisarea vectorului + matricii
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Citirea unui vector cu n elemente:
+
+int n,v[30] ;              // v[30] - 30 e dimensiunea maxima pe care o poate lua vectorul in acest caz
+cin >> n;
+for(int i = 1; i <= n; i++)
+	cin >> v[i];
+
+In continuare este afisarea vectorului v:
+for(int i = 1; i <= n; i++)
+	cout << v[i] <<" ";               // v[i] pentru a accesa continutul de pe pozitia i din vector 
+ 						   // i  va lua pe rand valori de la 1 la n 
+						  // cu cout << v[i] ; se afiseaza CONTINUTUL de la POZITIA i 
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Citirea unei matrici patratice m[][] cu n elemente:
+
+int n,m[30][30];              //m[30][30] - 30 e numarul maxim de linii si coloane pe care l poate avea matricea 
+cin>>n;		           // in total matricea poate avea 30*30 = 900 elemente , dar noi initializam doar n*n dintre ele
+
+for(int i = 1; i <= n; i++)			// for pt a accesa liniile matricii
+	for(int j = 1; j <= n; j++)	     // for pt a accesa elementele de la 1 la n de pe LINIA i (vezi desen de pe foaia pe care ti am dat o data trecuta)
+		cin>>m[i][j];               //initializam valoarea de pe linia i si coloana j
+
+Afisarea matricii :
+
+for(int i = 1; i <= n; i++){			// for pt a accesa liniile matricii
+	for(int j = 1; j <= n; j++)	     // for pt a accesa elementele de la 1 la n de pe LINIA i (vezi desen de pe foaia pe care ti am dat o data trecuta)
+		cout<<m[i][j]<<" ";         //initializam valoarea de pe linia i si coloana j
+	cout<<endl;				   // instructiune pentru a separa liniile din matrice la afisare ; fara ea tot rezultatul ar fi pe o singura linie				
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+hint problema 2 ( uita te la exemplul din probleme rezolvate data trecuta unde doar afisam nr cu proprietatea impusa )
+(pentru a gasi problemele rezolvate data trecuta , cauta 16.05.2023 in search bar ) 
+
+
+
+hint problema 4*( parcurgem elementele din matrice [ca la citire] si verificam proprietatea de paritate si le afisam pe cele ce indeplinesc conditia ) 
