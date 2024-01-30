@@ -1,2 +1,0 @@
-C:/Users/marie/OneDrive/Desktop/pregatire/sesiune1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/marie/OneDrive/Desktop/pregatire/sesiune1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
