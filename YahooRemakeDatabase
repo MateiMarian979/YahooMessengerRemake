@@ -1,0 +1,472 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.0
+-- Dumped by pg_dump version 16.0
+
+-- Started on 2024-02-05 18:33:49
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 219 (class 1259 OID 24653)
+-- Name: friendrequests; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.friendrequests (
+    requestid integer NOT NULL,
+    fromemail character varying(50),
+    toemail character varying(50),
+    requeststatus character varying(20) DEFAULT 'pending'::character varying,
+    requestdate timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.friendrequests OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 24652)
+-- Name: friendrequests_requestid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.friendrequests_requestid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.friendrequests_requestid_seq OWNER TO postgres;
+
+--
+-- TOC entry 4887 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: friendrequests_requestid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.friendrequests_requestid_seq OWNED BY public.friendrequests.requestid;
+
+
+--
+-- TOC entry 217 (class 1259 OID 24622)
+-- Name: friendships; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.friendships (
+    user1_id bigint NOT NULL,
+    user2_id bigint NOT NULL,
+    friendship_date timestamp without time zone
+);
+
+
+ALTER TABLE public.friendships OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 24672)
+-- Name: messages; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.messages (
+    messageid bigint NOT NULL,
+    senderid bigint,
+    messagetext character varying(250),
+    date timestamp without time zone,
+    replyid bigint
+);
+
+
+ALTER TABLE public.messages OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 24671)
+-- Name: messages_messageid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.messages_messageid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.messages_messageid_seq OWNER TO postgres;
+
+--
+-- TOC entry 4888 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: messages_messageid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.messages_messageid_seq OWNED BY public.messages.messageid;
+
+
+--
+-- TOC entry 222 (class 1259 OID 24693)
+-- Name: usermessagemapping; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usermessagemapping (
+    user_id bigint NOT NULL,
+    message_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.usermessagemapping OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 24612)
+-- Name: userssocialnetwork; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.userssocialnetwork (
+    id integer NOT NULL,
+    first_name character varying(255) NOT NULL,
+    last_name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.userssocialnetwork OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 24611)
+-- Name: userssocialnetwork_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.userssocialnetwork_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.userssocialnetwork_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4889 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: userssocialnetwork_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.userssocialnetwork_id_seq OWNED BY public.userssocialnetwork.id;
+
+
+--
+-- TOC entry 4707 (class 2604 OID 24656)
+-- Name: friendrequests requestid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendrequests ALTER COLUMN requestid SET DEFAULT nextval('public.friendrequests_requestid_seq'::regclass);
+
+
+--
+-- TOC entry 4710 (class 2604 OID 24719)
+-- Name: messages messageid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.messages ALTER COLUMN messageid SET DEFAULT nextval('public.messages_messageid_seq'::regclass);
+
+
+--
+-- TOC entry 4706 (class 2604 OID 24615)
+-- Name: userssocialnetwork id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.userssocialnetwork ALTER COLUMN id SET DEFAULT nextval('public.userssocialnetwork_id_seq'::regclass);
+
+
+--
+-- TOC entry 4878 (class 0 OID 24653)
+-- Dependencies: 219
+-- Data for Name: friendrequests; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.friendrequests (requestid, fromemail, toemail, requeststatus, requestdate) FROM stdin;
+64	marianmatei@gmail.com	tudormihaita@gmail.com	accepted	2023-12-14 13:37:48.711
+65	a@yahoo.com	b@yahoo.com	accepted	2024-01-30 12:44:03.898
+66	w@yahoo.com	a@yahoo.com	accepted	2024-01-30 17:45:29.683
+67	t@yahoo.com	a@yahoo.com	declined	2024-01-30 17:47:11.497
+\.
+
+
+--
+-- TOC entry 4876 (class 0 OID 24622)
+-- Dependencies: 217
+-- Data for Name: friendships; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.friendships (user1_id, user2_id, friendship_date) FROM stdin;
+40	39	2023-12-14 13:38:02.311567
+41	44	2024-01-30 12:44:19.829686
+45	41	2024-01-30 17:45:34.670091
+\.
+
+
+--
+-- TOC entry 4880 (class 0 OID 24672)
+-- Dependencies: 221
+-- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.messages (messageid, senderid, messagetext, date, replyid) FROM stdin;
+139	40	salut	2023-12-14 13:38:23.6	\N
+140	39	salutare	2023-12-14 13:38:33.107	\N
+141	40	ce faci tocilarule ? 	2023-12-14 13:38:41.574	\N
+142	39	uite turbotocilaresc 	2023-12-14 13:39:01.363	\N
+144	39	sunt fericit	2023-12-14 13:40:40.016	\N
+145	39	ca ne a dat labu la map	2023-12-14 13:40:46.736	\N
+146	39	in avans si pot sa le fac pe toate	2023-12-14 13:40:55.535	\N
+147	39	inainte de termen 	2023-12-14 13:41:01.512	\N
+148	40	ce tocilar esti 	2023-12-14 13:41:06.628	\N
+149	40	si eu le am facut inainte oricum	2023-12-14 13:41:13.246	\N
+150	41	hello	2024-01-30 12:44:33.817	\N
+151	44	hello	2024-01-30 12:44:41.868	\N
+152	41	what's upp	2024-01-30 12:44:59.629	\N
+153	44	pretty good hbu	2024-01-30 12:45:09.7	\N
+154	41	dd	2024-01-30 12:45:17.154	\N
+155	44	ee	2024-01-30 12:45:20	\N
+156	41	for real?	2024-01-30 12:47:23.455	153
+157	41	rlly ?	2024-01-30 12:54:14.646	156
+158	41	what s this 	2024-01-30 12:56:03.106	155
+159	41	xx	2024-01-30 13:15:29.26	156
+160	41	ttttttttttt	2024-01-30 17:46:07.421	\N
+161	41	ttttttttttt	2024-01-30 17:46:08.228	\N
+162	41	d	2024-01-30 21:41:30.831	\N
+163	41	rrrrrrr	2024-01-30 21:41:41.511	\N
+164	41	rrrrrrr	2024-01-30 21:41:42.015	\N
+165	41	eee	2024-01-30 21:41:50.577	162
+\.
+
+
+--
+-- TOC entry 4881 (class 0 OID 24693)
+-- Dependencies: 222
+-- Data for Name: usermessagemapping; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usermessagemapping (user_id, message_id) FROM stdin;
+39	139
+40	140
+39	141
+40	142
+40	144
+40	145
+40	146
+40	147
+39	148
+39	149
+44	150
+41	151
+44	152
+41	153
+44	154
+41	155
+44	156
+44	157
+44	158
+44	159
+44	160
+45	161
+44	162
+44	163
+45	164
+44	165
+\.
+
+
+--
+-- TOC entry 4875 (class 0 OID 24612)
+-- Dependencies: 216
+-- Data for Name: userssocialnetwork; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.userssocialnetwork (id, first_name, last_name, email, password) FROM stdin;
+39	mihaita	tudor	tudormihaita@gmail.com	$2a$10$EoZOcTGZ301cpwV5os2/8edvE2vpmWLBUJhfsHGqX8KynChcs.RPa
+40	matei	marian	marianmatei@gmail.com	$2a$10$CtvW8sn.KIm3jH55nPM/0uLdXVFXoGhLWI0Ls/km1ZYpuuS4mFa/m
+41	a	a	a@yahoo.com	$2a$10$p9Rq1Sl.ceaExIm2MgVxZ.PRF0CM5d1esj//zAW4iyoA5xfKkVmIS
+44	b	b	b@yahoo.com	$2a$10$6oG1onCnxHQMvV7qfoQCo.RCZJC0WlBWLne84frZT/9Wb2Qr4xHEK
+45	w	w	w@yahoo.com	$2a$10$aRGECeDmFmBzUZqwjK2fHOMsREuGtmMC.me9GyTmolSoe60hkb362
+46	t	t	t@yahoo.com	$2a$10$05L2v9M1KHX5B3.IziK9ZOnu06Be4XCIsZAGnVpD37Heguq2fCScG
+\.
+
+
+--
+-- TOC entry 4890 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: friendrequests_requestid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.friendrequests_requestid_seq', 67, true);
+
+
+--
+-- TOC entry 4891 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: messages_messageid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.messages_messageid_seq', 165, true);
+
+
+--
+-- TOC entry 4892 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: userssocialnetwork_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.userssocialnetwork_id_seq', 46, true);
+
+
+--
+-- TOC entry 4718 (class 2606 OID 24660)
+-- Name: friendrequests friendrequests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendrequests
+    ADD CONSTRAINT friendrequests_pkey PRIMARY KEY (requestid);
+
+
+--
+-- TOC entry 4716 (class 2606 OID 24626)
+-- Name: friendships friendships_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendships
+    ADD CONSTRAINT friendships_pkey PRIMARY KEY (user1_id, user2_id);
+
+
+--
+-- TOC entry 4720 (class 2606 OID 24721)
+-- Name: messages messages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (messageid);
+
+
+--
+-- TOC entry 4722 (class 2606 OID 24697)
+-- Name: usermessagemapping usermessagemapping_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usermessagemapping
+    ADD CONSTRAINT usermessagemapping_pkey PRIMARY KEY (user_id, message_id);
+
+
+--
+-- TOC entry 4712 (class 2606 OID 24621)
+-- Name: userssocialnetwork userssocialnetwork_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.userssocialnetwork
+    ADD CONSTRAINT userssocialnetwork_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 4714 (class 2606 OID 24619)
+-- Name: userssocialnetwork userssocialnetwork_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.userssocialnetwork
+    ADD CONSTRAINT userssocialnetwork_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4725 (class 2606 OID 24661)
+-- Name: friendrequests friendrequests_fromemail_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendrequests
+    ADD CONSTRAINT friendrequests_fromemail_fkey FOREIGN KEY (fromemail) REFERENCES public.userssocialnetwork(email);
+
+
+--
+-- TOC entry 4726 (class 2606 OID 24666)
+-- Name: friendrequests friendrequests_toemail_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendrequests
+    ADD CONSTRAINT friendrequests_toemail_fkey FOREIGN KEY (toemail) REFERENCES public.userssocialnetwork(email);
+
+
+--
+-- TOC entry 4723 (class 2606 OID 24627)
+-- Name: friendships friendships_user1_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendships
+    ADD CONSTRAINT friendships_user1_id_fkey FOREIGN KEY (user1_id) REFERENCES public.userssocialnetwork(id);
+
+
+--
+-- TOC entry 4724 (class 2606 OID 24632)
+-- Name: friendships friendships_user2_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendships
+    ADD CONSTRAINT friendships_user2_id_fkey FOREIGN KEY (user2_id) REFERENCES public.userssocialnetwork(id);
+
+
+--
+-- TOC entry 4727 (class 2606 OID 24722)
+-- Name: messages messages_replyid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_replyid_fkey FOREIGN KEY (replyid) REFERENCES public.messages(messageid);
+
+
+--
+-- TOC entry 4728 (class 2606 OID 24678)
+-- Name: messages messages_senderid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_senderid_fkey FOREIGN KEY (senderid) REFERENCES public.userssocialnetwork(id);
+
+
+--
+-- TOC entry 4729 (class 2606 OID 24727)
+-- Name: usermessagemapping usermessagemapping_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usermessagemapping
+    ADD CONSTRAINT usermessagemapping_message_id_fkey FOREIGN KEY (message_id) REFERENCES public.messages(messageid);
+
+
+--
+-- TOC entry 4730 (class 2606 OID 24698)
+-- Name: usermessagemapping usermessagemapping_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usermessagemapping
+    ADD CONSTRAINT usermessagemapping_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.userssocialnetwork(id);
+
+
+-- Completed on 2024-02-05 18:33:50
+
+--
+-- PostgreSQL database dump complete
+--
+
